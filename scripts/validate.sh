@@ -8,7 +8,7 @@ ref=data/newsdev2016.tok.en
 
 # decode
 
-cat $dev | ../../../amunmt/build/amun -c $prefix.dev.npz.amun.yml -b 12 -n --mini-batch 10 --maxi-batch 100 \ 
+cat $dev | ../../../amunmt/build/amun -c $prefix.dev.npz.amun.yml -b 12 -n --mini-batch 10 --maxi-batch 100 2>/dev/null \
  | sed 's/\@\@ //g' | mosesdecoder/scripts/recaser/detruecase.perl > $dev.output.postprocessed.dev
 
 ## get BLEU
