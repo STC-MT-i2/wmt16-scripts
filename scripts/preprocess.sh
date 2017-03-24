@@ -19,24 +19,21 @@ TRG=en
 
 # number of merge operations. Network vocabulary should be slightly larger (to include characters),
 # or smaller if the operations are learned on the joint vocabulary
-bpe_operations=89500
+bpe_operations=55000
 
 # path to moses decoder: https://github.com/moses-smt/mosesdecoder
-mosesdecoder=/path/to/mosesdecoder
+mosesdecoder=mosesdecoder
 
 # path to subword segmentation scripts: https://github.com/rsennrich/subword-nmt
-subword_nmt=/path/to/subword-nmt 
-
-# path to nematus ( https://www.github.com/rsennrich/nematus )
-nematus=/path/to/nematus
+subword_nmt=subword-nmt 
 
 # tokenize
 for prefix in corpus newsdev2016
  do
    cat data/$prefix.$SRC | \
    $mosesdecoder/scripts/tokenizer/normalize-punctuation.perl -l $SRC | \
-   ../preprocess/normalise-romanian.py | \
-   ../preprocess/remove-diacritics.py | \
+   ./scripts/normalise-romanian.py | \
+   ./scripts/remove-diacritics.py | \
    $mosesdecoder/scripts/tokenizer/tokenizer.perl -a -l $SRC > data/$prefix.tok.$SRC
 
    cat data/$prefix.$TRG | \
@@ -76,6 +73,3 @@ for prefix in corpus newsdev2016
   $subword_nmt/apply_bpe.py -c model/$SRC$TRG.bpe < data/$prefix.tc.$SRC > data/$prefix.bpe.$SRC
   $subword_nmt/apply_bpe.py -c model/$SRC$TRG.bpe < data/$prefix.tc.$TRG > data/$prefix.bpe.$TRG
  done
-
-# build network dictionary
-$nematus/data/build_dictionary.py data/corpus.bpe.$SRC data/corpus.bpe.$TRG
