@@ -10,6 +10,11 @@ then
     git clone https://github.com/rsennrich/subword-nmt
 fi
 
+if [ ! -e "data/ro-en.tgz" ]
+then
+    ./scripts/download-files.sh
+fi
+
 mkdir model
 
 if [ ! -e "data/corpus.bpe.en" ]

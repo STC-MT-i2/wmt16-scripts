@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash -v
 
 # this sample script preprocesses a sample corpus, including tokenization,
 # truecasing, and subword segmentation. 
@@ -19,7 +19,7 @@ TRG=en
 
 # number of merge operations. Network vocabulary should be slightly larger (to include characters),
 # or smaller if the operations are learned on the joint vocabulary
-bpe_operations=55000
+bpe_operations=60000
 
 # path to moses decoder: https://github.com/moses-smt/mosesdecoder
 mosesdecoder=mosesdecoder

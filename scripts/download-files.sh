@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -v
 
 # get En-Ro training data for WMT16
 
